@@ -3,6 +3,7 @@ const express = require("express");
 const { sequelize } = require("./models");
 const userRoutes = require("./routes/userRoutes.js"); // User routes
 const projectRoutes = require("./routes/projectRoutes.js"); // Project routes
+const taskRoutes = require("./routes/taskRoutes.js"); // Task routes
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(express.json());
 // Routes
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/projects", projectRoutes);
+app.use("/api/v1/tasks", taskRoutes);
 
 // Root Route
 app.get("/", (req, res) => {
