@@ -1,5 +1,7 @@
-require("dotenv").config();
 const express = require("express");
+const helmet = require("helmet");
+const cors = require("cors");
+const morgan = require("morgan");
 const { sequelize } = require("./models");
 const userRoutes = require("./routes/userRoutes.js"); // User routes
 const projectRoutes = require("./routes/projectRoutes.js"); // Project routes
@@ -8,6 +10,15 @@ const taskRoutes = require("./routes/taskRoutes.js"); // Task routes
 const app = express();
 
 app.use(express.json());
+app.use(helmet.xssFilter());
+app.use(helmet.xXssProtection());
+app.use(
+    cors({
+        origin: "http://localhost:3000",
+        optionsSuccessStatus: 200,
+    })
+);
+app.use(morgan("dev"));
 
 // Routes
 app.use("/api/v1/users", userRoutes);
